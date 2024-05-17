@@ -1,0 +1,40 @@
+﻿@model List<Category>
+@if (Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 10px">#</th>
+                <th>Name</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else
+{
+    <div class="position-relative p-3 bg-gray" style="height: 180px">
+        <div class="ribbon-wrapper ribbon-xl">
+            <div class="ribbon bg-primary text-lg">
+                No Data Found
+            </div>
+        </div>
+        Sorry, no data found
+        <br> Please try later <br>
+
+    </div>
+}
