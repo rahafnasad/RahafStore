@@ -64,7 +64,6 @@ namespace RahafStore.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            return Content("FGGFH");
             var author = context.Authors.Find(id);
             if (author is null) return NotFound();
             var authorVM = new AuthorFormVM
@@ -78,7 +77,6 @@ namespace RahafStore.Controllers
         [HttpPost]
         public IActionResult Edit(AuthorFormVM authorVM)
         {
-            return Content("H");
             if (!ModelState.IsValid)
             {
                 return View("Create", authorVM);
@@ -95,8 +93,8 @@ namespace RahafStore.Controllers
         }
         public IActionResult Delete(int id)
         {
-            var category = context.Categories.Find(id);
-            context.Categories.Remove(category);
+            var author = context.Authors.Find(id);
+            context.Authors.Remove(author);
             context.SaveChanges();
 
             return Ok();
@@ -104,15 +102,15 @@ namespace RahafStore.Controllers
         }
         public IActionResult Detalis(int id)
         {
-            var category = context.Categories.Find(id);
-            var categoryVM = new CategoryVM
+            var author = context.Authors.Find(id);
+            var authorVM = new AuthorVM
             {
                 Id = id,
-                Name = category.Name,
-                CreatedOn = category.CreatedOn,
-                UpdatedOn = category.UpdatedOn
+                Name = author.Name,
+                CreatedOn = author.CreatedOn,
+                UpdatedOn = author.UpdatedOn
             };
-            return View(categoryVM);
+            return View(authorVM);
 
         }
     }

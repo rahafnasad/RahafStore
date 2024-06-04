@@ -42,7 +42,7 @@ View Authors
                             <a asp-controller="Authors" asp-action="Detalis" asp-route-id="@item.Id" class="btn btn-detalis me-2 text-white">
                                 Detalis
                             </a>
-                            <a asp-controller="Authors" asp-action="Edit " asp-route-id="@item.Id" class="btn btn-dark px-4 me-2">
+                            <a asp-controller="Authors" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark px-4 me-2">
                                 Edit
                             </a>
 
@@ -129,7 +129,7 @@ else
                             text: "Your file has been deleted.",
                             icon: "success"
                         });
-                        const resopnse = await fetch(`/Categories/Delete/${id}`, { method: 'POST' });
+                        const resopnse = await fetch(`/Authors/Delete/${id}`, { method: 'POST' });
                         if (resopnse.ok) btn.closest("tr").remove();
                     } else if (
                         /* Read more about handling dismissals below */
