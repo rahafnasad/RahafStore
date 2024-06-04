@@ -1,0 +1,39 @@
+﻿@using RahafStore.ViewModel
+@model CategoryVM
+
+@section Titel {
+Categories
+}
+@section SubTitel {
+    @(Model?.Id != null ? "Edit Categories" :"Create Categories")
+}
+
+
+<div class="card card-info  ">
+    <div class="card-header">
+        <h3 class="card-title">Please enter a category name to create it</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form class="form-horizontal" asp-controller="Categories">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="Name"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Name" class="form-control" id="inputEmail3" placeholder="Category Name">
+                    <span asp-validation-for="Name" class="  text-danger"></span>
+                </div>
+            </div>
+      
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info">
+                @(Model?.Id != null ? "Update" : "Create ")
+
+                </button>
+            <button type="submit" class="btn btn-default float-right" asp-controller="Categories" asp-action="index">Cancel</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>

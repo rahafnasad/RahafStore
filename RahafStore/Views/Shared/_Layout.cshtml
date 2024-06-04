@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Starter</title>
+    <title>Rahaf Book Store | 2024</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -15,6 +15,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="~/Dashbord/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Dashbord/dist/css/adminlte.min.css">
+    <!-- custom style -->
+    <link rel="stylesheet" href="~/Dashbord/dist/css/main.css">
+    <link rel="stylesheet" href="~/Dashbord/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <link rel="stylesheet" href="~/Dashbord/plugins/toastr/toastr.min.css">
+
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -157,7 +162,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-info elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <img src="~/Dashbord/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -226,10 +231,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/Categories/Index" class="nav-link">
+                            <a asp-controller="Categories" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Categories
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Authors" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Authors
                                 </p>
                             </a>
                         </li>
@@ -247,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Starter Page</h1>
+                            <h1 class="m-0">@RenderSection("Titel",false)</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -262,7 +275,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="card"> @RenderBody()</div>
+                    <div class="card  card-outline">
+                        <div class="card-header d-flex  justify-content-between align-content-center">
+                            <h5 class="card-title m-0">@RenderSection("SubTitel",false)</h5>
+                            @RenderSection("Button",false)
+                        </div>
+
+                            <p class="card-text">  @RenderBody()</p>
+                       
+                    </div>
 
 
                 </div>
@@ -293,11 +314,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Dashbord/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert-->
+    <script src="~/Dashbord/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Dashbord/dist/js/adminlte.min.js"></script>
+    <script src="~/Dashbord/plugins/toastr/toastr.min.js"></script>
+    <script src="~/Dashbord/dist/js/demo.js"></script>
+
+
+    @RenderSection("Scripts",false)
 </body>
 </html>

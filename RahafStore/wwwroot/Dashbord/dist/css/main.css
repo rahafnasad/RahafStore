@@ -1,0 +1,9 @@
+﻿.card-header::after {
+    display:none;
+}
+.btn-detalis {
+background-color: lightcoral;
+}
+.s-12 {
+font-size:12px;
+}

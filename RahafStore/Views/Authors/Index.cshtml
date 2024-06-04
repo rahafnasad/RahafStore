@@ -1,78 +1,82 @@
-﻿@model List<Category>
+﻿@using RahafStore.ViewModel
+
+@model List<AuthorVM> 
 @section Titel {
-Categories
+Authors
 }
 @section SubTitel {
-View Categories
+View Authors
 
 }
 @section Button {
 
-    <a asp-controller="Categories" asp-action="Create"   class="btn btn-dark"> Create Categoy  <i class="fas fa-plus s-12"></i></a>
+    <a asp-controller="Authors" asp-action="Create" class="btn btn-dark"> Create Author  <i class="fas fa-plus s-12"></i></a>
     <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Create Categoy  <i class="fas fa-plus s-12"></i>
     </button>-->
-
 }
 
 @if (Model.Any())
-{                      
-    
+{
+
     <div class="card-body">
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th style="width: 10px">#</th>
-                <th>Name</th>
-                    <th class="w-25" >Actions</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                        <td>
-                            <a asp-controller="Categories" asp-action="Detalis" asp-route-id="@item.Id" class="btn btn-detalis me-2 text-white">
-                                Detalis </a>
-                            <a asp-controller="Categories" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark px-4 me-2"> Edit
-                               </a>
+                    <th style="width: 10px">#</th>
+                    <th>Name</th>
+                    <th class="w-25">Actions</th>
 
-                            <a href="#" data-id="@item.Id" class="btn btn-danger me-2 script-delete"> Delete 
-                                </a>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-controller="Authors" asp-action="Detalis" asp-route-id="@item.Id" class="btn btn-detalis me-2 text-white">
+                                Detalis
+                            </a>
+                            <a asp-controller="Authors" asp-action="Edit " asp-route-id="@item.Id" class="btn btn-dark px-4 me-2">
+                                Edit
+                            </a>
+
+                            <a href="#" data-id="@item.Id" class="btn btn-danger me-2 script-delete">
+                                Delete
+                            </a>
 
                         </td>
 
 
 
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 
 }
 
 else
 {
-                            <div class="card-body">
+    <div class="card-body">
 
-    <div class="position-relative p-3 bg-gray" style="height: 180px">
-        <div class="ribbon-wrapper ribbon-xl">
-            <div class="ribbon bg-info text-lg">
-                No Data Found
+        <div class="position-relative p-3 bg-gray" style="height: 180px">
+            <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-info text-lg">
+                    No Data Found
+                </div>
             </div>
-        </div>
-        Sorry, no data found
-        <br> Please try later <br>
+            Sorry, no data found
+            <br> Please try later <br>
 
+        </div>
     </div>
-       </div>
 }
 
 <!--
@@ -87,7 +91,7 @@ else
                 </button>
             </div>
             <div class="modal-body" id="modalContnet">
-               
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,12 +101,12 @@ else
     </div>
 </div>-->
 @section Scripts {
-  <script>
-     
+    <script>
 
-        document.querySelectorAll(".script-delete").forEach((btn)=> { 
-          btn.addEventListener("click", async() => { 
-              const id = btn.dataset.id;
+
+        document.querySelectorAll(".script-delete").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const id = btn.dataset.id;
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
                         confirmButton: "btn btn-success",
@@ -118,7 +122,7 @@ else
                     confirmButtonText: "Yes, delete it!",
                     cancelButtonText: "No, cancel!",
                     reverseButtons: true
-                }).then(async(result) => {
+                }).then(async (result) => {
                     if (result.isConfirmed) {
                         swalWithBootstrapButtons.fire({
                             title: "Deleted!",
@@ -138,10 +142,10 @@ else
                         });
                     }
                 });
-           
 
-          })
-      })
 
-  </script>
-  }
+            })
+        })
+
+    </script>
+}
