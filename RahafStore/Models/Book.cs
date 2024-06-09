@@ -10,6 +10,8 @@ namespace RahafStore.Models
         public int AuthorId { get; set; }
         public Author Author { get; set; } = null!;
         public string Publisher { get; set; } = null!;
+        public string description { get; set; } = null!;
+
         public DateTime publisherDate { get; set; }
         public string? ImageURL { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;

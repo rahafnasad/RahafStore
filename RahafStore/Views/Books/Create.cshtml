@@ -1,0 +1,69 @@
+﻿@using RahafStore.ViewModel
+@model BookFormVM
+
+@section Titel {
+Books
+}
+@section SubTitel {
+Create}
+
+<div class="card card-info  ">
+ 
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form class="form-horizontal" asp-controller="Books">
+        <div class="card-body">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="Title"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Title" class="form-control"  placeholder="Category Name">
+                    <span asp-validation-for="Title" class="  text-danger"></span>
+                </div>
+                <label  class="col-sm-2 col-form-label" asp-for="AuthorId"></label>
+
+                <div class="col-sm-10">
+                    <select asp-for="AuthorId" class="form-control" asp-items="@Model.Authors"></select>
+                        <span asp-validation-for="AuthorId" class="  text-danger"></span>
+                </div>
+
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="Publisher"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="Publisher" class="form-control"  placeholder="Publisher Name">
+                    <span asp-validation-for="Publisher" class="  text-danger"></span>
+                </div>
+
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="publisherDate"></label>
+                <div class="col-sm-10">
+                    <input type="date" asp-for="publisherDate" class="form-control" />
+                    <span asp-validation-for="publisherDate" class="  text-danger"></span>
+                </div>
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="ImageURL"></label>
+                <div class="col-sm-10">
+                    <input type="file" asp-for="ImageURL" class="form-control" />
+                    <span asp-validation-for="ImageURL" class="  text-danger"></span>
+                </div>
+                <label for="inputEmail3" class="col-sm-2 col-form-label" asp-for="description"></label>
+                <div class="col-sm-10">
+                    <input type="text" asp-for="description" class="form-control" placeholder="description">
+                    <span asp-validation-for="description" class="  text-danger"></span>
+                </div>
+                <label class="col-sm-2 col-form-label" asp-for="CategorisId"></label>
+
+                <div class="col-sm-10">
+                    <select asp-for="CategorisId" class="form-control" asp-items="@Model.Categories"></select>
+                    <span asp-validation-for="CategorisId" class="  text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <button type="submit" class="btn btn-info">
+                @(Model?.Id != null ? "Update" : "Create ")
+
+            </button>
+            <button type="submit" class="btn btn-default float-right" asp-controller="Books" asp-action="index">Cancel</button>
+        </div>
+        <!-- /.card-footer -->
+    </form>
+</div>
