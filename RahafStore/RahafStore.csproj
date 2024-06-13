@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Book\" />
+    <Folder Include="wwwroot\img\Book\" />
   </ItemGroup>
 
 </Project>

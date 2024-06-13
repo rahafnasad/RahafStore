@@ -11,7 +11,7 @@ namespace RahafStore.ViewModel
         public string Title { get; set; } = null!;
         [Display(Name ="Author")]
         public int AuthorId { get; set; }
-        public List<SelectListItem> Authors { get; set; } = null!;
+        public List<SelectListItem>? Authors { get; set; }
         public string Publisher { get; set; } = null!;
         [Display(Name = "publisher Date")]
         public DateTime publisherDate { get; set; } = DateTime.Now;
@@ -22,7 +22,7 @@ namespace RahafStore.ViewModel
         [Display(Name = "Categoris")]
 
         public List<int> CategorisId { get; set; } = new List<int>();
-        public List<SelectListItem> Categories { get; set; }
+        public List<SelectListItem>? Categories { get; set; }
 
 
 

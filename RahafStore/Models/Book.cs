@@ -16,7 +16,7 @@ namespace RahafStore.Models
         public string? ImageURL { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime UpdatedOn { get; set; } = DateTime.Now;
-        public List<Category> Categories { get; set; } = new List<Category>();
+        public List<BookCategory> Categories { get; set; } = new List<BookCategory>();
 
     }
 }
