@@ -21,26 +21,17 @@ namespace RahafStore.Controllers
             var Book = context.Books.Include(book => book.Author)
                 .Include(book => book.Categories)
                 .ThenInclude(book => book.Category).ToList();
-            var BookVM = new List<BookVM>();
-            foreach (var item in Book) {
-                var bookVM = new BookVM {
-                    Id = item.Id,
-                    Title = item.Title,
-                    Author = item.Author,
-                    Publisher = item.Publisher,
-                    publisherDate = item.publisherDate,
-                    ImageURL = item.ImageURL,
-                    Categories = new List<string>(),
-    
-
-
-            };
-                foreach (var c in item.Categories)
-                {
-                    bookVM.Categories.Add(c.Category.Name);
-                }
-                BookVM.Add(bookVM);
-            }
+            var BookVM = Book.Select(book => new BookVM
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Publisher = book.Publisher,
+                publisherDate = book.publisherDate,
+                ImageURL = book.ImageURL,
+                Categories = book.Categories.Select(book => book.Category.Name).ToList(),
+            }).ToList();
+      
             return View(BookVM);
         }
         [HttpGet]
@@ -114,7 +105,7 @@ namespace RahafStore.Controllers
             };
             context.Books.Add(Book);
             context.SaveChanges();
-            return Content("Done");
+            return RedirectToAction("Index");
         }
     }
 }
