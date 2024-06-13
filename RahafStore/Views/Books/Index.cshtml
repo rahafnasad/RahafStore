@@ -1,0 +1,164 @@
+﻿@using RahafStore.ViewModel
+
+@model List<BookVM>
+@section Titel {
+Books}
+@section SubTitel {
+View Books
+
+}
+@section Button {
+
+    <a asp-controller="Authors" asp-action="Create" class="btn btn-dark"> Create Author  <i class="fas fa-plus s-12"></i></a>
+    <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Create Categoy  <i class="fas fa-plus s-12"></i>
+    </button>-->
+}
+
+@if (Model.Any())
+{
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>titel</th>
+
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>publisher Date</th>
+                    <th>Image</th>
+                                        <th>categoris</th>
+
+                    <th class="w-25">Actions</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Title</td>
+                        <td>@item.Author</td>
+                        <td>@item.Publisher</td>
+                        <td>@item.publisherDate</td>
+                        <td> <img src="~/img/Book/@item.ImageURL" /></td>
+                        <td>@string.Join(",",item.Categories)</td>
+
+
+                        <td>
+                            <a asp-controller="Authors" asp-action="Detalis" asp-route-id="@item.Id" class="btn btn-detalis me-2 text-white">
+                                Detalis
+                            </a>
+                            <a asp-controller="Authors" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-dark px-4 me-2">
+                                Edit
+                            </a>
+
+                            <a href="#" data-id="@item.Id" class="btn btn-danger me-2 script-delete">
+                                Delete
+                            </a>
+
+                        </td>
+
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+}
+
+else
+{
+    <div class="card-body">
+
+        <div class="position-relative p-3 bg-gray" style="height: 180px">
+            <div class="ribbon-wrapper ribbon-xl">
+                <div class="ribbon bg-info text-lg">
+                    No Data Found
+                </div>
+            </div>
+            Sorry, no data found
+            <br> Please try later <br>
+
+        </div>
+    </div>
+}
+
+<!--
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Categoy  <i class="fas fa-plus s-12"></i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalContnet">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+@section Scripts {
+    <script>
+
+
+        document.querySelectorAll(".script-delete").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+                const id = btn.dataset.id;
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+                        cancelButton: "btn btn-danger"
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true
+                }).then(async (result) => {
+                    if (result.isConfirmed) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        const resopnse = await fetch(`/Authors/Delete/${id}`, { method: 'POST' });
+                        if (resopnse.ok) btn.closest("tr").remove();
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        swalWithBootstrapButtons.fire({
+                            title: "Cancelled",
+                            text: "Your imaginary file is safe :)",
+                            icon: "error"
+                        });
+                    }
+                });
+
+
+            })
+        })
+
+    </script>
+}

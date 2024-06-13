@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using RahafStore.Data;
 using RahafStore.Models;
 using RahafStore.ViewModel;
@@ -17,7 +18,30 @@ namespace RahafStore.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var Book = context.Books.Include(book => book.Author)
+                .Include(book => book.Categories)
+                .ThenInclude(book => book.Category).ToList();
+            var BookVM = new List<BookVM>();
+            foreach (var item in Book) {
+                var bookVM = new BookVM {
+                    Id = item.Id,
+                    Title = item.Title,
+                    Author = item.Author,
+                    Publisher = item.Publisher,
+                    publisherDate = item.publisherDate,
+                    ImageURL = item.ImageURL,
+                    Categories = new List<string>(),
+    
+
+
+            };
+                foreach (var c in item.Categories)
+                {
+                    bookVM.Categories.Add(c.Category.Name);
+                }
+                BookVM.Add(bookVM);
+            }
+            return View(BookVM);
         }
         [HttpGet]
         public IActionResult Create() {
